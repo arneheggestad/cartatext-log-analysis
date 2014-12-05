@@ -1,0 +1,5 @@
+Unique users: 1000
+Total uses: 127028
+Mean usage: 126.028
+Median usage: 128
+Usage range: 1 - 250

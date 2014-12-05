@@ -6,8 +6,8 @@ var userInfo = require('./bin/userInfo.js'),
 
 //fakeData(1000);
 
-var users = csv.parse('2014.users.fake');
-userInfo(users);
+var fakeUsers = csv.parse('./data/2014.users.fake');
+userInfo(fakeUsers);
 
 // var convos;
 // convoInfo(convos);

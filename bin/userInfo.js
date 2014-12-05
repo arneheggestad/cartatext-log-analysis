@@ -24,7 +24,7 @@ var stats = {
     for (var j = 0; j < usageArr.length; j++) {
       usageLog += '\n' + usageArr[j].count + ',' + usageArr[j].uses;
     }
-    fs.writeFileSync('usageDistribution.csv',usageLog);
+    fs.writeFileSync('./analysis/usageDistribution.csv',usageLog);
   }
 }
 
@@ -45,7 +45,7 @@ var userInfo = function (users) {
   var medianUser = Math.round((len-1)/2);
   var median = parseInt(users[medianUser].uses);
 
-  var logFile = 'userAnalysis.txt';
+  var logFile = './analysis/userAnalysis.txt';
   var log = 'Unique users: ' + len + '\n'
             + 'Total uses: ' + sumUses + '\n'
             + 'Mean usage: ' + mean + '\n'
