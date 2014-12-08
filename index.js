@@ -13,6 +13,6 @@ var userInfo = require('./bin/userInfo.js'),
 //userInfo(fakeUsers);
 
 // process convo log
-var fakeLog = csv.parse('./data/2014-12.log.fake');
-convoInfo(fakeLog);
+// var fakeLog = csv.parse('./data/2014-12.log.fake');
+// convoInfo(fakeLog);
 
