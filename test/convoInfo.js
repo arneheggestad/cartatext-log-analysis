@@ -1,4 +1,4 @@
 var should = require('should'),
-    convoInfo = require('../bin/convoInfo.js')
+    convoInfo = require('../lib/convoInfo.js')
     ;
 

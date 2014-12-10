@@ -1,6 +1,6 @@
 var should = require('should'),
-    userInfo = require('../bin/userInfo.js')
-    testUsers = require('./2014.users.fake')
+    userInfo = require('../lib/userInfo.js')
+    testUsers = require('./2014-fakeUsers.js')
     ;
 
 describe('countUsers', function () {
