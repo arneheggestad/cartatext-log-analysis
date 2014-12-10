@@ -1,6 +1,6 @@
-var userInfo = require('./bin/userInfo.js'),
-	convoInfo = require('./bin/convoInfo.js'),
-	fakeData = require('./bin/fakeData.js'),
+var userInfo = require('./lib/userInfo.js'),
+	convoInfo = require('./lib/convoInfo.js'),
+	fakeData = require('./lib/fakeData.js'),
 //	sampleUsers = require('./bin/sampleUsers.js'),
 	csv = require('csv-to-json')
 	;
