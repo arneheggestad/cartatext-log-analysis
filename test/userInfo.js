@@ -3,10 +3,8 @@ var should = require('should'),
     testUsers = require('./2014-fakeUsers.js')
     ;
 
-// describe('countUsers', function () {
-
-// 	it('should be 1000 users', function (done) {
-// 		done();
-// 	})
-
-// })
+describe('count-users', function () {
+	it('should be 1000 users', function (done) {
+		userInfo.
+	})
+})

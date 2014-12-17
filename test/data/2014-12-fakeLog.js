@@ -18,5 +18,3 @@ module.export = convos;
 
 var logParse = new RegExp(/'(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t'/g);
 var repl = "{'convoID':'$01', 'sessionID':'$02', 'convoStart':'$03', 'sessionStart':'$04', 'sessionLength': '$05', 'tries':'$06', 'totalConvoLength':'$07', 'query':'$08', 'response': '$09', 'routeNo': '$10', 'querySansBus': '$11', 'definitiveStop': '$12', 'matchedStops': '$13', 'filteredStops': '$14', 'culledStops': '$15', 'duplicateStops': '$16', 'reasonForConvo': '$17'},'";
-
-
