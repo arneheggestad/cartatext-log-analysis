@@ -57,7 +57,8 @@ describe('convo log testing', function () {
 		convoInfo.getConvoIDs(convoArray, function (err, foundConvos) {
 			convoInfo.getTokens(convoArray, function (err, foundTokens) {
 				convoInfo.getSessions(convoArray, foundConvos, foundTokens, function (err, convoObj) {
-					console.log(convoObj);
+					convoObj['33bc1abb-b24e-4b28-8e03-d15a8f07d06a'].Tries.should.equal('4');
+					// console.log(convoObj);
 					done();
 				})
 			})
