@@ -16,14 +16,14 @@ var convoArray = require('./data/2014-12-fakeLog.js'),
 	  getTokensResult = {
 	  	'convoTokens': [
 		  	'convoID', 
-		  	'convoStart', 
+		  	'convoStart',
+		    'tries',
 		  	'totalConvoLength', 
 		  	'reasonForConvo' ],
 		  'sessionTokens': [
 		  	'sessionID',
 		    'sessionStart',
 		    'sessionLength',
-		    'tries',
 		    'query',
 		    'response',
 		    'routeNo',
@@ -57,6 +57,7 @@ describe('convo log testing', function () {
 		convoInfo.getConvoIDs(convoArray, function (err, foundConvos) {
 			convoInfo.getTokens(convoArray, function (err, foundTokens) {
 				convoInfo.getSessions(convoArray, foundConvos, foundTokens, function (err, convoObj) {
+					console.log(convoObj);
 					done();
 				})
 			})
