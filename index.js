@@ -17,6 +17,7 @@ parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
 	convoInfo.getConvoIDs(convoLogArray, function (err, convoIDs) {
 		if (err) { return console.log(err); }
 		convoInfo.getTokens(convoLogArray, function (err, tokens) {
+			console.log(tokens);
 			if (err) { return console.log(err); }
 			convoInfo.getSessions(convoLogArray, convoIDs, tokens, function (err, convosObj) {
 				if (err) { return console.log(err); }

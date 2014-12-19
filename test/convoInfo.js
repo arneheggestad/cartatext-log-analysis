@@ -14,31 +14,31 @@ var convoArray = require('./data/2014-12-fakeLog.js'),
 		  '20d51062-dd00-418f-9045-ff6627d42079',
 		  '33bc1abb-b24e-4b28-8e03-d15a8f07d06a' ],
 	  getTokensResult = {
-	  	'convoTokens': [
-		  	'convoID', 
-		  	'convoStart',
-		    'tries',
-		  	'totalConvoLength', 
-		  	'reasonForConvo' ],
+		  'convoTokens': [ 
+		  	'ConversationID',
+	    	'ConversationStartTime',
+		    'Tries',
+		    'TotalConversationLength',
+		    'ReasonforConvo' ],
 		  'sessionTokens': [
-		  	'sessionID',
-		    'sessionStart',
-		    'sessionLength',
-		    'query',
-		    'response',
-		    'routeNo',
-		    'querySansBus',
-		    'definitiveStop',
-		    'matchedStops',
-		    'filteredStops',
-		    'culledStops',
-		    'duplicateStops' ]
-	  }
+		    'SessionID',
+	      'SessionStartTime',
+	      'SessionLengthms',
+	      'Query',
+	      'OurResponse',
+	      'RouteNo',
+	      'QuerySansBus',
+	      'DefinitiveStop',
+	      'MatchedStops',
+	      'FilteredStops',
+	      'CulledStops',
+	      'DuplicateStops' ] }
 
 describe('convo log testing', function () {
 	it('should return an array of convo IDs', function (done) {
 		convoInfo.getConvoIDs(convoArray, function (err, foundConvos) {
 			foundConvos.length.should.eql(9);
+			console.log(err);
 			done();
 		});
 	});
