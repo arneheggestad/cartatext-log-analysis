@@ -1,19 +1,27 @@
 var userInfo = require('./lib/userInfo.js'),
-	convoInfo = require('./lib/convoInfo.js'),
-	fakeData = require('./lib/fakeData.js'),
-//	sampleUsers = require('./bin/sampleUsers.js'),
-	parser = require('./lib/parser.js')
+		convoInfo = require('./lib/convoInfo.js'),
+		parser = require('./lib/parser.js'),
+		fs = require('fs')
 	;
 
 // Generate fake user log data
 //fakeData(1000);
 
-// Process user log data
-var fakeUsers = parser.parseFile('./data/2014.users.fake', ',', function (fakeUsers) {
-	userInfo(fakeUsers);
-});
+var convoLog = './data/openChatt.log',
+		path = new RegExp(/(.*\/\w*\/)(\w*)\.(\w*)/);
+var logAnalysisFile = convoLog.replace(path, './analysis/$2ConvoAnalysis.txt');
 
-// process convo log
-var fakeLog = parser.parseFile('./data/2014-12.log.fake', '\t', function (fakeConvos) {
-	convoInfo(fakeConvos);
-});
+parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
+	if (err) { return console.log(err); }
+	if (!convoLogArray) { return console.log('no convoLogArray!'); }
+	convoInfo.getConvoIDs(convoLogArray, function (err, convoIDs) {
+		if (err) { return console.log(err); }
+		convoInfo.getTokens(convoLogArray, function (err, tokens) {
+			if (err) { return console.log(err); }
+			convoInfo.getSessions(convoLogArray, convoIDs, tokens, function (err, convosObj) {
+				if (err) { return console.log(err); }
+				fs.writeFileSync(logAnalysisFile, JSON.stringify(convosObj, null, '\t'));
+			})
+		})
+	})
+})
