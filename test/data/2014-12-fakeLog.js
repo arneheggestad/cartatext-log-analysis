@@ -14,7 +14,4 @@ var convos = [
 {'convoID':'33bc1abb-b24e-4b28-8e03-d15a8f07d06a', 'sessionID':'7a904303-5015-4f0e-b636-00eb8bee1b20', 'convoStart':'Wed Dec 10 2014 09:08:19 GMT-0500 (EST)', 'sessionStart':'Wed Dec 10 2014 09:08:40 GMT-0500 (EST)', 'sessionLength': '30', 'tries':'4', 'totalConvoLength':'20.848 seconds.', 'query':'4th', 'response': 'I\'m sorry I\'m unable to identify your stop. Please call CARTA at (423) 629-1473 for assistance.', 'routeNo': 'SHUTTLE', 'querySansBus': 'shuttle market and main broad 4th', 'definitiveStop': 'null', 'matchedStops': 'Greater than 6 matched stops.', 'filteredStops': '', 'culledStops': 'null', 'duplicateStops': 'null', 'reasonForConvo': 'more than twelve stops matched'}
 ];
 
-module.export = convos;
-
-var logParse = new RegExp(/'(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t(.*)\t'/g);
-var repl = "{'convoID':'$01', 'sessionID':'$02', 'convoStart':'$03', 'sessionStart':'$04', 'sessionLength': '$05', 'tries':'$06', 'totalConvoLength':'$07', 'query':'$08', 'response': '$09', 'routeNo': '$10', 'querySansBus': '$11', 'definitiveStop': '$12', 'matchedStops': '$13', 'filteredStops': '$14', 'culledStops': '$15', 'duplicateStops': '$16', 'reasonForConvo': '$17'},'";
+module.exports = convos;
