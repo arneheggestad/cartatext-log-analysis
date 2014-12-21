@@ -7,9 +7,10 @@ var userInfo = require('./lib/userInfo.js'),
 // Generate fake user log data
 //fakeData(1000);
 
-var convoLog = './data/openChatt.log',
-		path = new RegExp(/(.*\/\w*\/)(\w*)\.(\w*)/);
+var convoLog = './logs/2014-12.log',
+		path = new RegExp(/(.*\logs\/)(.*)(\.log)/);
 var logAnalysisFile = convoLog.replace(path, './analysis/$2ConvoAnalysis.txt');
+console.log(logAnalysisFile);
 
 parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
 	if (err) { return console.log(err); }
