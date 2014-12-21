@@ -10,7 +10,6 @@ var userInfo = require('./lib/userInfo.js'),
 var convoLog = './logs/2014-12.log',
 		path = new RegExp(/(.*\logs\/)(.*)(\.log)/);
 var logAnalysisFile = convoLog.replace(path, './analysis/$2ConvoAnalysis.txt');
-console.log(logAnalysisFile);
 
 parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
 	if (err) { return console.log(err); }
@@ -18,7 +17,6 @@ parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
 	convoInfo.getConvoIDs(convoLogArray, function (err, convoIDs) {
 		if (err) { return console.log(err); }
 		convoInfo.getTokens(convoLogArray, function (err, tokens) {
-			console.log(tokens);
 			if (err) { return console.log(err); }
 			convoInfo.getSessions(convoLogArray, convoIDs, tokens, function (err, convosObj) {
 				if (err) { return console.log(err); }
