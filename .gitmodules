@@ -1,0 +1,3 @@
+[submodule "logs"]
+	path = logs
+	url = git@bitbucket.org:mrkp/cartagraphy-logs.git
