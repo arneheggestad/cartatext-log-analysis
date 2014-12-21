@@ -8,8 +8,9 @@ var userInfo = require('./lib/userInfo.js'),
 //fakeData(1000);
 
 var convoLog = './logs/2014-12.log',
-		path = new RegExp(/(.*\logs\/)(.*)(\.log)/);
-var logAnalysisFile = convoLog.replace(path, './analysis/$2ConvoAnalysis.txt');
+		path = new RegExp(/(.*\logs\/)(.*)(\.log)/),
+		logAnalysisFile = convoLog.replace(path, './analysis/$2ConvoAnalysis.txt')
+		;
 
 parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
 	if (err) { return console.log(err); }
@@ -21,6 +22,7 @@ parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
 			convoInfo.getSessions(convoLogArray, convoIDs, tokens, function (err, convosObj) {
 				if (err) { return console.log(err); }
 				fs.writeFileSync(logAnalysisFile, JSON.stringify(convosObj, null, '\t'));
+				console.log('Success. Analysis written to: ' + logAnalysisFile);
 			})
 		})
 	})
