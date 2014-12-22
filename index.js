@@ -1,6 +1,11 @@
 var userInfo = require('./lib/userInfo.js'),
 		convoInfo = require('./lib/convoInfo.js'),
 		parser = require('./lib/parser.js'),
+		express = require('express'),
+		app = express(),
+		port = process.env.PORT || 8080,
+		morgan = require('morgan'),
+		bodyParser = require('body-parser'),
 		fs = require('fs')
 	;
 
@@ -12,26 +17,30 @@ var convoLog = './logs/2014-12.log',
 		logAnalysisFile = convoLog.replace(path, './analysis/$2ConvoAnalysis.txt')
 		;
 
-parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
-	if (err) { return console.log(err); }
-	if (!convoLogArray) { return console.log('no convoLogArray!'); }
-	convoInfo.getConvoIDs(convoLogArray, function (err, convoIDs) {
-		if (err) { return console.log(err); }
-		convoInfo.getTokens(convoLogArray, function (err, tokens) {
-			if (err) { return console.log(err); }
-			convoInfo.getSessions(convoLogArray, convoIDs, tokens, function (err, convosObj) {
-				if (err) { return console.log(err); }
-				fs.writeFileSync(logAnalysisFile, JSON.stringify(convosObj, null, '\t'));
-				console.log('Success. Analysis written to: ' + logAnalysisFile);
-			})
-		})
-	})
+// set up express
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.listen(port);
+console.log('Listening for logs on port ' + port);
+
+// routes
+app.post('/', function(req, res) {
+	var body = req.body;
+	console.log(body);
+	res.send({ message: 'received' });
+});
+
+app.get('/users', function(req, res) {
+	parser.parseFile(userLog, ',', function (err, userArray) {
+		userInfo.makeObj(userArray, function (err, userObj) {
+			if (err) { res.JSON({'error': err}); }
+			res.JSON(userObj);
+		});
+	});	
 })
 
 var userLog = './logs/2014.users';
 
-parser.parseFile(userLog, ',', function (err, userArray) {
-	userInfo.makeObj(userArray, function (err, userObj) {
-		console.log(userObj);
-	});
-});
+

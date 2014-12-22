@@ -17,5 +17,9 @@
     "mocha": "^2.0.1",
     "should": "^4.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "body-parser": "^1.10.0",
+    "express": "^4.10.6",
+    "morgan": "^1.5.0"
+  }
 }
