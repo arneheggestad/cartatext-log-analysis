@@ -16,5 +16,12 @@ describe('makeObject', function () {
 			done();
 		});
 	});
-	
+});
+describe('classifyUsage', function () {
+	it('should return an array', function (done) {
+		userInfo.classifyUsage(testUserArray, function (err, usageArray) {
+			console.log(usageArray);
+			done();
+		})
+	})
 })
