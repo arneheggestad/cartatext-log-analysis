@@ -6,8 +6,8 @@
 
 <body>
 	<script type='text/javascript'>
-	var w = 1000;
-	var h = 300;
+	var w = 800;
+	var h = 400;
 
 	//Create SVG element
 	var dataset = [ 
@@ -257,6 +257,15 @@
   [ 6, 2 ],
   [ 2, 1 ] 
 ];
+
+  //scaling
+  var xScale = d3.scale.linear()
+                       .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+                       .range([0, w]);
+  var yScale = d3.scale.linear()
+                     .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+                     .range([h, 0]); // invert y-scale so smallest values are at bottom
+
 	var svg = d3.select("body")
 	            .append("svg")
 	            .attr("width", w)
@@ -266,10 +275,10 @@
 	   .enter()
 	   .append("circle")
 	   .attr("cx", function(d) { // number of times user has used the service
-	        return d[1] * 3; // fake scaling
+	        return xScale(d[1]);
 	   })
 	   .attr("cy", function(d) { // number of users
-	        return 300 - (d[0] * 20); // fake scaling
+	        return yScale(d[0]);
 	   })
 	   .attr("r", 1);
 
