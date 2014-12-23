@@ -35,8 +35,8 @@ app.post('/', function(req, res) {
 app.get('/users', function(req, res) {
 	parser.parseFile(userLog, ',', function (err, userArray) {
 		userInfo.makeObj(userArray, function (err, userObj) {
-			if (err) { res.JSON({'error': err}); }
-			res.JSON(userObj);
+			if (err) { res.json({'error': err}); }
+			res.json(userObj);
 		});
 	});	
 })
