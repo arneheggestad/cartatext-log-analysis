@@ -6,69 +6,75 @@
 	</head>
 
 <body>
+  <button id="userDataType">Refresh usage data</button>
+  <div id="usageScatterplot" class="plot">
 	<script type='text/javascript'>
 
+  var w = 800;
+  var h = 300;
+  var dataset = [];
+  var padding = 20;
+
   $(document).ready(function() {
-    var w = 800;
-    var h = 300;
-    var dataset = [];
-    var padding = 20;
+    $("#userDataType").click(function() {    
 
-    $.ajax({
-      type: 'GET',
-      url: 'http://ops.smallbatchdevelopment.com:8080/users',
-      async: false,
-      dataType: 'json',
-      success: function(userObj) {
-        dataset = userObj.usage;
-      }
-    });
 
-    //scaling
-    var xScale = d3.scale.linear()
-                         .domain([0, d3.max(dataset, function(d) { return d[1]; })])
-                         .range([padding, w - padding * 2]);
-    var yScale = d3.scale.linear()
-                       .domain([0, d3.max(dataset, function(d) { return d[0]; })])
-                       .range([h - padding, padding]); // invert y-scale so smallest values are at bottom
+      $.ajax({
+        type: 'GET',
+        url: 'http://ops.smallbatchdevelopment.com:8080/users',
+        async: false,
+        dataType: 'json',
+        success: function(userObj) {
+          dataset = userObj.usage;
+        }
+      });
 
-    //Create SVG element
-    var svg = d3.select("body")
-                .append("svg")
-                .attr("width", w)
-                .attr("height", h);
-    svg.selectAll("circle")
-       .data(dataset)
-       .enter()
-       .append("circle")
-       .attr("cx", function(d) { // number of times user has used the service
+      //scaling
+      var xScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+                           .range([padding, w - padding * 2]);
+      var yScale = d3.scale.linear()
+                         .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+                         .range([h - padding, padding]); // invert y-scale so smallest values are at bottom
+
+      //Create SVG element
+      var svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+      svg.selectAll("circle")
+         .data(dataset)
+         .enter()
+         .append("circle")
+         .attr("cx", function(d) { // number of times user has used the service
+              return xScale(d[1]);
+         })
+         .attr("cy", function(d) { // number of users
+              return yScale(d[0]);
+         })
+         .attr("r", 3);
+
+      svg.selectAll("text")
+         .data(dataset)
+         .enter()
+         .append("text")
+         .text(function(d) {
+            return d[1] + "," + d[0];
+            })
+        .attr("x", function(d) {
             return xScale(d[1]);
-       })
-       .attr("cy", function(d) { // number of users
+            })
+        .attr("y", function(d) {
             return yScale(d[0]);
-       })
-       .attr("r", 3);
-
-    svg.selectAll("text")
-       .data(dataset)
-       .enter()
-       .append("text")
-       .text(function(d) {
-          return d[1] + "," + d[0];
-          })
-      .attr("x", function(d) {
-          return xScale(d[1]);
-          })
-      .attr("y", function(d) {
-          return yScale(d[0]);
-          })
-       .attr("font-family", "sans-serif")
-       .attr("font-size", "11px")
-       .attr("fill", "red");
-
+            })
+         .attr("font-family", "sans-serif")
+         .attr("font-size", "11px")
+         .attr("fill", "red");
+    })
   })
 
 	 </script>
+  </div>
 </body>
 
 </html>
