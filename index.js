@@ -27,3 +27,11 @@ parser.parseFile(convoLog, '\t', function (err, convoLogArray) {
 		})
 	})
 })
+
+var userLog = './logs/2014.users';
+
+parser.parseFile(userLog, ',', function (err, userArray) {
+	userInfo.makeObj(userArray, function (err, userObj) {
+		console.log(userObj);
+	});
+});
