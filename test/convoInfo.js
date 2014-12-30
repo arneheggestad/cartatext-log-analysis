@@ -65,3 +65,12 @@ describe('convo log testing', function () {
 		})
 	})
 });
+var convoObject = require('./data/convoObject.js');
+describe('find success/failures', function () {
+	it('should find success and failures', function (done) {
+		convoInfo.findSuccess(convoObject, function (err, result) {
+			console.log(result);
+			done();
+		})
+	})
+})

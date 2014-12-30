@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<title>Success Bar Chart</title>
+		<script type="text/javascript" src="./d3.v3.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.js"></script>
+    <style>
+			.chart div {
+			  font: 10px sans-serif;
+			  background-color: steelblue;
+			  text-align: right;
+			  padding: 3px;
+			  margin: 1px;
+			  color: white;
+			}
+			.fail div {
+			  background-color: red;
+			}
+		</style>
+	</head>
+
+<body>
+  <div class="chart"></div>
+  <div class="chart fail"></div>
+	<script type='text/javascript'>
+	var success = { '1': { success: 12, fail: 7 },
+									'2': { success: 4, fail: 3 },
+									'3': { success: 0, fail: 3 },
+									'4': { success: 0, fail: 1 } };
+	var data = [],
+			dataFail = [];
+	for (var key in success) {
+		if (success.hasOwnProperty(key)) {
+			data.push(success[key].success);
+			dataFail.push(success[key].fail);
+		}
+	}
+	d3.select(".chart")
+  .selectAll("div")
+    .data(data)
+  .enter().append("div")
+    .style("width", function(d) { return d * 20 + "px"; })
+    .text(function(d) { return d; });
+	d3.select(".fail")
+  .selectAll("div")
+    .data(dataFail)
+  .enter().append("div")
+    .style("width", function(d) { return d * 20 + "px"; })
+    .text(function(d) { return d; });
+	</script>
+</body>
+</htmL>
