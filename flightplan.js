@@ -48,9 +48,11 @@ plan.local(function(local) {
     // check branch name
     var branch = commitStatus.stdout.replace(/(\#\#\s)(.*)\.\.\.(.*\n|.*$)*(.*\n|.*$)?/,'$2')
     if (branch !== plan.runtime.target) {
-      var input = local.prompt('Warning! Target is different from current branch. Do you wish to continue? [y/n]')
+      var input = local.prompt('Warning! Target is different from current branch. Override? [y/n]')
       if (input !== 'y') {
         plan.abort(plan.runtime.target + ' different from ' + branch + '.');
+      } else {
+        local.log('Overridden: ' + plan.runtime.target + ' different from ' + branch + '.')
       }
     }
   }
