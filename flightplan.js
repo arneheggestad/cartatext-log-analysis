@@ -57,24 +57,24 @@ plan.local(function(local) {
     }
   }
 
-  // local.log('Copy files to remote hosts');
+  local.log('Copy files to remote hosts');
 
-  // var filesToCopy = local.exec('git ls-files', {silent: true});
-  // // rsync files to all the destination's hosts
-  // local.transfer(filesToCopy, '/tmp/' + tmpDir);
+  var filesToCopy = local.exec('git ls-files', {silent: true});
+  // rsync files to all the destination's hosts
+  local.transfer(filesToCopy, '/tmp/' + tmpDir);
 });
 
 // run commands on remote hosts (destinations)
-// plan.remote(function(remote) {
-//   remote.log('Move folder to root');
-//   remote.sudo('cp -R /tmp/' + tmpDir + ' ~', {user: username});
-//   remote.rm('-rf /tmp/' + tmpDir);
+plan.remote(function(remote) {
+  remote.log('Move folder to root');
+  remote.sudo('cp -R /tmp/' + tmpDir + ' ~', {user: username});
+  remote.rm('-rf /tmp/' + tmpDir);
 
-//   remote.log('Install dependencies');
-//   remote.sudo('npm --production --prefix ~/' + tmpDir + ' install ~/' + tmpDir, {user: username});
+  remote.log('Install dependencies');
+  remote.sudo('npm --production --prefix ~/' + tmpDir + ' install ~/' + tmpDir, {user: username});
 
-//   remote.log('Reload application');
-//   remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
-//   remote.exec('forever stop ~/'+appName+'/'+startFile, {failsafe: true});
-//   remote.exec('forever start ~/'+appName+'/'+startFile);
-// });
+  remote.log('Reload application');
+  remote.sudo('ln -snf ~/' + tmpDir + ' ~/'+appName, {user: username});
+  remote.exec('forever stop ~/'+appName+'/'+startFile, {failsafe: true});
+  remote.exec('forever start ~/'+appName+'/'+startFile);
+});
