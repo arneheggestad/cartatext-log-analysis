@@ -39,17 +39,19 @@ plan.local(function(local) {
   local.log('Checking git status');
   var commitStatus = local.exec('git status -b --porcelain', { silent: true });
   if (commitStatus.stdout !== null) {
-    // if (commitStatus.stdout.search(/\[/) >= 0) {
-    //   plan.abort('Error: Current branch not pushed.')
-    // }
-    // if (commitStatus.stdout.search(/(\sM\s|\s\?\?\s)/) >= 0) {
-    //   plan.abort('Error: Uncommitted file changes found.')
-    // }
+    if (commitStatus.stdout.search(/\[/) >= 0) {
+      plan.abort('Error: Current branch is different from remote repo.')
+    }
+    if (commitStatus.stdout.search(/(\sM\s|\s\?\?\s)/) >= 0) {
+      plan.abort('Error: Uncommitted file changes found.')
+    }
     // check branch name
-    var branch = commitStatus.stdout.replace(/\#\#\s(.*)\.\.\.(.*\n)*(.*\n|.*$)?/,'$1')
-    if (branch !== process.env.ENV) {
-      console.log(commitStatus);
-      plan.abort(branch);
+    var branch = commitStatus.stdout.replace(/(\#\#\s)(.*)\.\.\.(.*\n|.*$)*(.*\n|.*$)?/,'$2')
+    if (branch !== plan.runtime.target) {
+      var input = local.prompt('Warning! Target is different from current branch. Do you wish to continue? [y/n]')
+      if (input !== 'y') {
+        plan.abort(plan.runtime.target + ' different from ' + branch + '.');
+      }
     }
   }
 
